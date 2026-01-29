@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AcademiX Login Replica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <div class="login-shell">
+    <div class="top-right-dropdown">
+      <button type="button" class="dropdown-toggle" id="dropdownToggle">
+        <span class="material-icons">language</span>
+        <span class="dropdown-text">English</span>
+        <span class="material-icons dropdown-arrow">arrow_drop_down</span>
+      </button>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="#" class="dropdown-item active">English</a>
+        <a href="#" class="dropdown-item">Français</a>
+        <a href="#" class="dropdown-item">Español</a>
+        <a href="#" class="dropdown-item">Português</a>
+      </div>
+    </div>
+
+    <div class="brand-header">
+      <div class="brand">
+        <div class="logo-icon">🎓</div>
+        <div class="name">
+          <span class="title">AcademiX</span>
+          <span class="subtitle">Your Smart Academic Companion</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="login-card">
+      <div class="university-header">
+        <img src="10003.png" alt="Eden University" class="institution-logo" />
+        <div class="university-name">Eden University</div>
+      </div>
+
+      <form id="loginForm">
+        <div class="field">
+          <label for="email">Email or Student ID</label>
+          <div class="input">
+            <span class="input-icon material-icons">person</span>
+            <input id="email" name="email" type="text" value="2024060000" placeholder="Enter your email or student ID"
+              required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="input">
+            <span class="input-icon material-icons">lock</span>
+            <input id="password" name="password" type="password" placeholder="Enter your password" required />
+            <button type="button" id="togglePass" class="eye-toggle material-icons" aria-label="Show password">
+              visibility
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label>
+            <input type="checkbox" name="remember" /> Remember me
+          </label>
+          <a href="#">Forgot password?</a>
+        </div>
+
+        <button class="btn" type="submit">
+          Sign In <span aria-hidden="true">→</span>
+        </button>
+      </form>
+
+      <div class="muted-link">
+        Admin? <a href="admin_login.html">Login Here</a>
+      </div>
+
+      <div class="muted-link"
+        style="margin-top: 8px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.15);">
+        <a href="./admin_login.html" style="color: #06b6d4; font-weight: 500; margin-right: 12px;">Admin Login →</a>
+        <button id="inlineAdminToggle"
+          style="background: transparent; border: none; color: #06b6d4; font-weight: 500; cursor: pointer;">Admin login
+          (inline)</button>
+      </div>
+      <div id="inlineAdminBox" style="display: none; padding: 0 36px 24px;">
+        <form id="inlineAdminForm">
+          <div class="field">
+            <label for="inlineAdminUsername">Admin Username</label>
+            <div class="input">
+              <span class="input-icon material-icons">admin_panel_settings</span>
+              <input id="inlineAdminUsername" name="username" type="text" placeholder="Enter admin username" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="inlineAdminPassword">Password</label>
+            <div class="input">
+              <span class="input-icon material-icons">lock</span>
+              <input id="inlineAdminPassword" name="password" type="password" placeholder="Enter admin password"
+                required />
+              <button type="button" id="toggleInlineAdminPass" class="eye-toggle material-icons"
+                aria-label="Show password">visibility</button>
+            </div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn" type="submit">Admin Sign In</button>
+            <button type="button" class="btn-ghost" id="inlineAdminCancel">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="admin_data.js"></script>
+  <script src="script.js"></script>
+  <script>
+    // FALLBACK: If admin_data.js fails to load (common on InfiniteFree), define the logic here
+    if (typeof verifyStudentLogin !== 'function') {
+      console.warn('admin_data.js not loaded. Using internal student login fallback.');
+
+      const FB_URL = 'https://uqeifgszsqtfcuscrexd.supabase.co';
+      const FB_KEY = 'sb_publishable_KO9_5LwsUO2tCYQsMKC8iA_Ur3Rj1SO';
+
+      let fb_supabase = null;
+      try {
+        if (window.supabase) fb_supabase = window.supabase.createClient(FB_URL, FB_KEY);
+      } catch (e) { console.error('Fallback Supabase init failed', e); }
+
+      window.verifyStudentLogin = async function (email, password) {
+        if (!fb_supabase || !email || !password) return null;
+        try {
+          const val = email.trim();
+          const { data, error } = await fb_supabase.from('students').select('*')
+            .or(`email.eq.${val},studentId.eq.${val}`).maybeSingle();
+          if (error) throw error;
+          if (data && data.password && data.password.trim() === password.trim()) return data;
+          return null;
+        } catch (e) {
+          console.error('verifyStudentLogin fallback failed', e);
+          return null;
+        }
+      };
+
+      window.setCurrentStudent = function (student) {
+        if (student) {
+          sessionStorage.setItem('currentStudentId', student.id);
+          sessionStorage.setItem('currentStudentData', JSON.stringify(student));
+        } else {
+          sessionStorage.removeItem('currentStudentId');
+          sessionStorage.removeItem('currentStudentData');
+        }
+      };
+
+      window.getAllStudents = async function () { return []; };
+    }
+
+    // Wait for DOM and scripts to load
+    document.addEventListener('DOMContentLoaded', function () {
+      // Update login form to check against student database
+      const loginForm = document.getElementById('loginForm');
+      if (loginForm) {
+        loginForm.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          const email = document.getElementById('email').value.trim();
+          const password = document.getElementById('password').value;
+
+          try {
+            if (typeof verifyStudentLogin === 'function') {
+              const student = await verifyStudentLogin(email, password);
+              console.log('Login attempt:', { email, password, student: student ? 'found' : 'not found' });
+              if (student) {
+                if (typeof setCurrentStudent === 'function') {
+                  setCurrentStudent(student);
+                }
+                window.location.href = './dashboard.html';
+              } else {
+                // Debug: Check what students exist
+                const allStudents = typeof getAllStudents === 'function' ? await getAllStudents() : [];
+                console.log('Available students:', allStudents);
+                alert('Invalid email/student ID or password. Please check your credentials and try again.');
+              }
+            } else {
+              alert('System error: Login functions not loaded. Please refresh the page.');
+            }
+          } catch (err) {
+            console.error('Login error:', err);
+            alert('An error occurred during login. Please ensure you have an internet connection and the database is configured.');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile - eCampus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <div class="app">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <img src="10003.png" alt="AcademiX" class="brand-logo" />
+        <div class="name">
+          <span class="title">AcademiX</span>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-heading">Main</div>
+        <a class="nav-link" href="./dashboard.html">
+          <span class="nav-left">🏠 Home</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-heading">Academics</div>
+        <a class="nav-link" href="#">
+          <span class="nav-left">🎓 Academic Management</span>
+          <span>▾</span>
+        </a>
+        <a class="nav-link" href="#"><span class="nav-left">📝 Register Courses</span></a>
+        <a class="nav-link" href="#"><span class="nav-left">📚 My Courses</span></a>
+        <a class="nav-link" href="#"><span class="nav-left">📊 Academic Result</span></a>
+        <a class="nav-link" href="#"><span class="nav-left">📨 Academic Request</span></a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-heading">Schedule</div>
+        <a class="nav-link" href="#"><span class="nav-left">🗓 My Timetable</span></a>
+        <a class="nav-link" href="#"><span class="nav-left">🎥 Online Meeting</span></a>
+        <a class="nav-link" href="#"><span class="nav-left">📅 Academic Calendar</span></a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-heading">Student Services</div>
+        <a class="nav-link" href="#"><span class="nav-left">💳 Finance</span></a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-heading">Accommodation</div>
+        <a class="nav-link" href="#"><span class="nav-left">🏢 Apply For A Room</span></a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-heading">Reports</div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-heading">Other</div>
+        <a class="nav-link" href="#"><span class="nav-left">🔒 Privacy</span></a>
+      </div>
+
+      <div class="sidebar-footer">
+        <div>2024061311@edenuniversity.education</div>
+        <div>Student</div>
+        <button class="signout-btn"
+          onclick="if(typeof logoutStudent === 'function') logoutStudent(); window.location.href='index.html'">Sign
+          out</button>
+      </div>
+    </aside>
+
+    <div>
+      <header class="topbar">
+        <div style="display: flex; align-items: center;">
+          <button class="hamburger-btn" id="sidebarToggle">
+            <span class="material-icons">menu</span>
+          </button>
+          <div class="breadcrumb">
+            <span>eCampus</span> / <strong>My Profile</strong>
+          </div>
+        </div>
+        <div class="top-actions">
+          <div class="search">
+            <span>🔍</span>
+            <input type="text" placeholder="Search..." />
+          </div>
+          <button class="icon-btn" aria-label="Notifications">🔔</button>
+          <button class="icon-btn" aria-label="Settings">⚙️</button>
+          <div class="avatar-pill-dropdown">
+            <button type="button" class="avatar-pill" id="avatarDropdownToggle">
+              <span class="status-dot"></span>
+              <span>2 ▾</span>
+            </button>
+            <div class="avatar-dropdown-menu" id="avatarDropdownMenu">
+              <a href="./profile.html" class="avatar-dropdown-item">
+                <span class="material-icons">person</span>
+                <span>Profile</span>
+              </a>
+              <a href="#" class="avatar-dropdown-item">
+                <span class="material-icons">settings</span>
+                <span>Settings</span>
+              </a>
+              <a href="./index.html" class="avatar-dropdown-item">
+                <span class="material-icons">logout</span>
+                <span>Logout</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="profile-header">
+          <div class="student-badge">
+            <span class="material-icons">check_circle</span>
+            <span>Student</span>
+          </div>
+        </div>
+
+        <div class="page-head">
+          <div class="page-title">
+            <h1>
+              <span class="material-icons">person</span>
+              My Profile
+            </h1>
+            <p class="sub">Manage your account information and settings.</p>
+          </div>
+        </div>
+
+        <div class="profile-container">
+          <!-- User Profile Card -->
+          <div class="profile-card">
+            <div class="profile-avatar">
+              <img src="2024061311.png" alt="Profile Picture" class="avatar-image" />
+            </div>
+            <h2 class="profile-name">Sean Nyakutira</h2>
+            <p class="profile-email">2024061311@edenuniversity.education</p>
+            <p class="profile-member">Member since October 2025</p>
+            <button class="btn-primary edit-profile-btn">
+              <span class="material-icons">edit</span>
+              Edit Profile
+            </button>
+          </div>
+
+          <!-- Personal Information Section -->
+          <div class="profile-section">
+            <div class="section-header">
+              <h2>Personal Information</h2>
+              <a href="#" class="edit-link">Edit</a>
+            </div>
+            <div class="info-grid">
+              <div class="info-item">
+                <label>Full Name</label>
+                <p>Sean Nyakutira</p>
+              </div>
+              <div class="info-item">
+                <label>Email Address</label>
+                <p>2024061311@edenuniversity.education</p>
+              </div>
+              <div class="info-item">
+                <label>Username</label>
+                <p>2024061311@edenuniversity.education</p>
+              </div>
+              <div class="info-item">
+                <label>Phone Number</label>
+                <p>+260776950796</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security Settings Section -->
+          <div class="profile-section">
+            <div class="section-header">
+              <h2>Security Settings</h2>
+              <a href="#" class="edit-link">Change Password</a>
+            </div>
+            <div class="security-item">
+              <div class="security-icon">
+                <span class="material-icons">lock</span>
+              </div>
+              <div class="security-content">
+                <p class="security-title">Password</p>
+                <p class="security-desc">Strong password protects your account</p>
+              </div>
+              <a href="#" class="security-link">Change password →</a>
+            </div>
+            <div class="security-item">
+              <div class="security-icon green">
+                <span class="material-icons">shield</span>
+              </div>
+              <div class="security-content">
+                <p class="security-title">Two-Factor Authentication</p>
+                <p class="security-desc">Disabled - Consider enabling for better security.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Account Status Section -->
+          <div class="profile-section">
+            <div class="section-header">
+              <h2>Account Status</h2>
+            </div>
+            <div class="status-grid">
+              <div class="status-item">
+                <div class="status-label">Email Verified</div>
+                <div class="status-value verified">
+                  <span class="material-icons">check_circle</span>
+                  <span>Verified</span>
+                </div>
+              </div>
+              <div class="status-item">
+                <div class="status-label">Phone Verified</div>
+                <div class="status-value not-set">
+                  <span class="status-dot-small"></span>
+                  <span>Not Set</span>
+                </div>
+              </div>
+              <div class="status-item">
+                <div class="status-label">Two-Factor Auth</div>
+                <div class="status-value disabled">
+                  <span class="status-dot-small grey"></span>
+                  <span>Disabled</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Account Activity Section -->
+          <div class="profile-section">
+            <div class="section-header">
+              <h2>Account Activity</h2>
+            </div>
+            <div class="activity-grid">
+              <div class="activity-item">
+                <div class="activity-label">Account Created</div>
+                <div class="activity-value">October 06, 2025 at 2:03 PM</div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-label">Account Status</div>
+                <div class="activity-value active">
+                  <span class="material-icons">check_circle</span>
+                  <span>Active</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="admin_data.js"></script>
+  <script src="script.js"></script>
+  <script>
+    // FALLBACK: Essential session functions if admin_data.js is blocked
+    if (typeof getCurrentStudent !== 'function') {
+      window.getCurrentStudent = function () {
+        const d = sessionStorage.getItem('currentStudentData');
+        return d ? JSON.parse(d) : null;
+      };
+    }
+
+    document.addEventListener('DOMContentLoaded', async function () {
+      if (typeof getCurrentStudent === 'function') {
+        const student = getCurrentStudent();
+        if (student) {
+          // Update profile info
+          const nameEls = document.querySelectorAll('.profile-name, .info-item:nth-child(1) p');
+          nameEls.forEach(el => el.textContent = student.fullName || 'N/A');
+
+          const emailEls = document.querySelectorAll('.profile-email, .info-item:nth-child(2) p, .info-item:nth-child(3) p');
+          emailEls.forEach(el => el.textContent = student.email || student.studentId || 'N/A');
+
+          const phoneEl = document.querySelector('.info-item:nth-child(4) p');
+          if (phoneEl) phoneEl.textContent = student.phone || 'N/A';
+
+          const avatarImg = document.querySelector('.avatar-image');
+          if (avatarImg && student.profilePhoto) {
+            avatarImg.src = student.profilePhoto;
+          }
+
+          const memberEl = document.querySelector('.profile-member');
+          if (memberEl && student.createdAt) {
+            const date = new Date(student.createdAt);
+            memberEl.textContent = `Member since ${date.toLocaleString('en-US', { month: 'long', year: 'numeric' })}`;
+          }
+
+          const activityDate = document.querySelector('.activity-item:nth-child(1) .activity-value');
+          if (activityDate && student.createdAt) {
+            activityDate.textContent = new Date(student.createdAt).toLocaleString('en-US', {
+              month: 'long', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
+            });
+          }
+        } else {
+          window.location.href = 'index.html';
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

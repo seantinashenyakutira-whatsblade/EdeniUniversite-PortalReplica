@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>eCampus Dashboard Replica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+  <div class="app">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <img src="10003.png" alt="AcademiX" class="brand-logo" />
+        <div class="name">
+          <span class="title">AcademiX</span>
+        </div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-heading">Main</div>
+        <a class="nav-link active" href="#" data-target="homeView">
+          <span class="nav-left">🏠 Home</span>
+        </a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-heading">Academics</div>
+        <a class="nav-link" href="#">
+          <span class="nav-left">🎓 Academic Management</span>
+          <span>▾</span>
+        </a>
+        <a class="nav-link" href="#"><span class="nav-left">📝 Register Courses</span></a>
+        <a class="nav-link" href="#"><span class="nav-left">📚 My Courses</span></a>
+        <a class="nav-link" href="#" data-target="resultsView"><span class="nav-left">📊 Academic Result</span></a>
+        <a class="nav-link" href="#"><span class="nav-left">📨 Academic Request</span></a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-heading">Schedule</div>
+        <a class="nav-link" href="#"><span class="nav-left">🗓 My Timetable</span></a>
+        <a class="nav-link" href="#"><span class="nav-left">🎥 Online Meeting</span></a>
+        <a class="nav-link" href="#"><span class="nav-left">📅 Academic Calendar</span></a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-heading">Student Services</div>
+        <a class="nav-link" href="#" data-target="financeView"><span class="nav-left">💳 Finance</span></a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-heading">Accommodation</div>
+        <a class="nav-link" href="#"><span class="nav-left">🏢 Apply For A Room</span></a>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-heading">Reports</div>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-heading">Other</div>
+        <a class="nav-link" href="#"><span class="nav-left">🔒 Privacy</span></a>
+      </div>
+
+      <div class="sidebar-footer">
+        <div>2024061311@edenuniversity.education</div>
+        <div>Student</div>
+        <button class="signout-btn"
+          onclick="if(typeof logoutStudent==='function')logoutStudent(); window.location.href='index.html'">Sign
+          out</button>
+      </div>
+    </aside>
+
+    <div>
+      <header class="topbar">
+        <div style="display: flex; align-items: center;">
+          <button class="hamburger-btn" id="sidebarToggle">
+            <span class="material-icons">menu</span>
+          </button>
+          <div class="breadcrumb">
+            <span>eCampus</span> / <strong>Home</strong>
+          </div>
+        </div>
+        <div class="top-actions">
+          <div class="search">
+            <span>🔍</span>
+            <input type="text" placeholder="Search..." />
+          </div>
+          <button class="icon-btn" aria-label="Notifications">🔔</button>
+          <button class="icon-btn" aria-label="Settings">⚙️</button>
+          <div class="avatar-pill-dropdown">
+            <button type="button" class="avatar-pill" id="avatarDropdownToggle">
+              <span class="status-dot"></span>
+              <span>2 ▾</span>
+            </button>
+            <div class="avatar-dropdown-menu" id="avatarDropdownMenu">
+              <a href="#" class="avatar-dropdown-item">
+                <span class="material-icons">person</span>
+                <span>Profile</span>
+              </a>
+              <a href="#" class="avatar-dropdown-item">
+                <span class="material-icons">settings</span>
+                <span>Settings</span>
+              </a>
+              <a href="#" class="avatar-dropdown-item">
+                <span class="material-icons">logout</span>
+                <span>Logout</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <!-- Home view -->
+        <div id="homeView" class="view visible">
+          <div class="page-head">
+            <div class="page-title">
+              <h1>Student Dashboard</h1>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <section class="card user-card">
+              <div class="user-top">
+                <div class="user-info">
+                  <h2 id="dashboardName">Loading...</h2>
+                  <div class="id" id="dashboardStudentId">Loading...</div>
+                </div>
+                <img id="dashboardAvatar" src="./2024061311.png" alt="Profile picture" class="avatar" />
+              </div>
+
+              <div class="user-grid">
+                <div class="user-field">
+                  <span class="user-label">School</span>
+                  <span class="user-value" id="dashboardSchool">Loading...</span>
+                </div>
+                <div class="user-field">
+                  <span class="user-label">Programme</span>
+                  <span class="user-value" id="dashboardProgram">Loading...</span>
+                </div>
+                <div class="user-field">
+                  <span class="user-label">Academic Session</span>
+                  <span class="user-value" id="dashboardSession">Loading...</span>
+                </div>
+                <div class="user-field">
+                  <span class="user-label">Academic Level</span>
+                  <span class="user-value" id="dashboardLevel">Loading...</span>
+                </div>
+                <div class="user-field">
+                  <span class="user-label">Current CGPA</span>
+                  <span class="user-value" id="dashboardCGPA">Loading...</span>
+                </div>
+                <div class="user-field">
+                  <span class="user-label">Registration Status</span>
+                  <span class="user-value" id="dashboardStatus">Loading...</span>
+                </div>
+                <div class="user-field">
+                  <span class="user-label">Student Sponsor</span>
+                  <span class="user-value" id="dashboardSponsor">Loading...</span>
+                </div>
+                <div class="user-field">
+                  <span class="user-label">Outstanding Balance</span>
+                  <span class="user-value" id="dashboardBalance">Loading...</span>
+                </div>
+                <div class="user-field">
+                  <span class="user-label">Accommodation</span>
+                  <span class="user-value" id="dashboardAccommodation">Loading...</span>
+                </div>
+                <div class="user-field">
+                  <span class="user-label">Remark</span>
+                  <span class="user-value" id="dashboardRemark">Loading...</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="card performance-card">
+              <h3 class="card-title">📊 Performance Summary - 2025</h3>
+              <div class="empty">
+                <div style="font-size: 36px;">📈</div>
+                <div>No course performance data available</div>
+              </div>
+            </section>
+          </div>
+
+          <div class="grid-2" style="margin-top: 24px;">
+            <section class="section schedule-card">
+              <div class="schedule-head">📅 Today's Schedule</div>
+              <div class="schedule-empty">
+                <div style="font-size: 22px;">🗓</div>
+                <div>No classes scheduled for today</div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="quick-card">
+                <div class="quick-header">Quick Actions & Notifications</div>
+                <div class="quick-actions">
+                  <div class="quick-item">Registration</div>
+                  <div class="quick-item" data-target="financeView">💰 Fees</div>
+                  <div class="quick-item">🗓 Timetable</div>
+                  <div class="quick-item" data-target="resultsView">📑 Results</div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- Results view -->
+        <div id="resultsView" class="view">
+          <div class="page-head">
+            <div class="page-title">
+              <h1>Academic Results</h1>
+            </div>
+          </div>
+
+          <!-- Fee Clearance Alert -->
+          <div id="feeClearanceAlert" class="alert warning" style="display: none; margin-bottom: 24px;">
+            <span class="material-icons" style="margin-right: 8px;">warning</span>
+            <span>Fee Clearance Required: You have outstanding fees of <strong id="outstandingFeeAmount">ZMW
+                0.00</strong>. Clear your fees to view complete results and download transcripts.</span>
+          </div>
+
+          <div class="results-cards" id="resultsSummaryCards">
+            <div class="result-card">
+              <div class="result-label">Total Courses Passed</div>
+              <div class="result-value" id="totalCoursesPassed">-- / 5</div>
+            </div>
+            <div class="result-card">
+              <div class="result-label">Credits (Earned/Attempted)</div>
+              <div class="result-value" id="creditsEarned">-- / --</div>
+            </div>
+            <div class="result-card">
+              <div class="result-label">Academic Years</div>
+              <div class="result-value" id="academicYears">1 Year</div>
+            </div>
+            <div class="result-card">
+              <div class="result-label">Overall GPA</div>
+              <div class="result-value" id="overallGPA">--</div>
+            </div>
+          </div>
+
+          <section class="section">
+            <h2 id="resultsTableTitle">Academic Year: 2025 - 2026</h2>
+            <div class="table-wrap">
+              <table class="results-table" id="resultsTable">
+                <thead>
+                  <tr>
+                    <th>Course Code</th>
+                    <th>Course Name</th>
+                    <th>Semester</th>
+                    <th>Comment</th>
+                  </tr>
+                </thead>
+                <tbody id="resultsTableBody">
+                  <tr>
+                    <td colspan="4" style="text-align: center; padding: 40px; color: var(--muted);">
+                      No results available
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <!-- Finance view -->
+        <div id="financeView" class="view">
+          <div class="page-head">
+            <div class="page-title">
+              <h1>Fee Statement</h1>
+              <span class="sub" id="financeStudentInfo">Loading...</span>
+            </div>
+            <div class="head-actions">
+              <button class="btn-ghost">Academic Year: 2025 - 2026</button>
+            </div>
+          </div>
+
+
+          <div class="finance-grid">
+            <div class="finance-card balance-card">
+              <div class="finance-label">Outstanding Balance</div>
+              <div class="finance-amount" id="financeBalance">Loading...</div>
+              <div class="finance-actions">
+                <button class="chip" data-target="financeStatementView">View Financial Statement</button>
+              </div>
+            </div>
+          </div>
+
+          <section class="section">
+            <div class="table-head">
+              <h2>Fee Breakdown</h2>
+              <div class="head-actions">
+                <button class="btn-ghost">Print Invoice</button>
+                <button class="btn-primary">Make Payment</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table class="results-table">
+                <thead>
+                  <tr>
+                    <th>Fee Description</th>
+                    <th>Amount (ZMW)</th>
+                    <th>Paid (ZMW)</th>
+                    <th>Balance (ZMW)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Total</td>
+                    <td>--</td>
+                    <td>--</td>
+                    <td>--</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <!-- Finance Statement view -->
+        <div id="financeStatementView" class="view">
+          <div class="page-head">
+            <div class="page-title">
+              <h1>Payment History</h1>
+              <span class="sub" id="financeStatementInfo">Loading...</span>
+            </div>
+            <div class="head-actions">
+              <button class="btn-ghost">Academic Year: 2025 - 2026</button>
+              <button class="btn-ghost" data-target="financeView">Back to Fee Statement</button>
+            </div>
+          </div>
+
+          <div class="finance-grid single">
+            <div class="finance-card summary-card">
+              <div class="finance-label">Total Paid</div>
+              <div class="finance-amount positive">ZMW 15,790.00</div>
+            </div>
+          </div>
+
+          <section class="section">
+            <h2>Financial Statement</h2>
+            <div class="table-wrap">
+              <table class="results-table finance-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Transaction Reference</th>
+                    <th>Credit</th>
+                    <th>Debit</th>
+                    <th>Running Balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Feb 25, 2025</td>
+                    <td>TXN-92486440</td>
+                    <td class="credit">K 3,000.00</td>
+                    <td class="debit">K 0.00</td>
+                    <td class="running">K (3,000.00)</td>
+                  </tr>
+                  <tr>
+                    <td>Mar 31, 2025</td>
+                    <td>TXN-93804939</td>
+                    <td class="credit">K 2,950.00</td>
+                    <td class="debit">K 0.00</td>
+                    <td class="running">K (5,950.00)</td>
+                  </tr>
+                  <tr>
+                    <td>May 02, 2025</td>
+                    <td>TXN-442562Y22L51KS</td>
+                    <td class="credit">K 1,940.00</td>
+                    <td class="debit">K 0.00</td>
+                    <td class="running">K (0.00)</td>
+                  </tr>
+                  <tr>
+                    <td>Jun 18, 2025</td>
+                    <td>TXN-K5R6A5V4N8R2</td>
+                    <td class="credit">K 2.00</td>
+                    <td class="debit">K 0.00</td>
+                    <td class="running">K (2.00)</td>
+                  </tr>
+                  <tr>
+                    <td>Jul 09, 2025</td>
+                    <td>TXN-934421287</td>
+                    <td class="credit">K 250.00</td>
+                    <td class="debit">K 0.00</td>
+                    <td class="running">K (-252.00)</td>
+                  </tr>
+                  <tr>
+                    <td>Aug 13, 2025</td>
+                    <td>TXN-INV00082276648</td>
+                    <td class="credit">K 5,000.00</td>
+                    <td class="debit">K 0.00</td>
+                    <td class="running">K (2,638.00)</td>
+                  </tr>
+                  <tr>
+                    <td>Aug 20, 2025</td>
+                    <td>TXN-TV4BDI21KS3804</td>
+                    <td class="credit">K 1,000.00</td>
+                    <td class="debit">K 0.00</td>
+                    <td class="running">K (1,638.00)</td>
+                  </tr>
+                  <tr>
+                    <td>Nov 05, 2025</td>
+                    <td>TXN-48XPBDI253898048</td>
+                    <td class="credit">K 2,000.00</td>
+                    <td class="debit">K 0.00</td>
+                    <td class="running positive">-K 362.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="admin_data.js"></script>
+  <script src="utils.js"></script>
+  <script src="script.js"></script>
+  <script>
+    // FALLBACK: Essential session functions if admin_data.js is blocked
+    if (typeof getCurrentStudent !== 'function') {
+      window.getCurrentStudent = function () {
+        const d = sessionStorage.getItem('currentStudentData');
+        return d ? JSON.parse(d) : null;
+      };
+      window.refreshCurrentStudent = async function () {
+        return window.getCurrentStudent();
+      };
+    }
+
+    // Load student data into dashboard (global function)
+    async function loadDashboardData() {
+      // Refresh student data from server to catch any admin changes
+      const student = await refreshCurrentStudent();
+
+      if (student) {
+        // Update sidebar
+        const sidebarEmail = document.getElementById('sidebarEmail');
+        if (sidebarEmail) {
+          sidebarEmail.textContent = student.email || student.studentId || 'N/A';
+        }
+
+        // Update dashboard header
+        const dashboardName = document.getElementById('dashboardName');
+        const dashboardStudentId = document.getElementById('dashboardStudentId');
+        if (dashboardName) dashboardName.textContent = student.fullName || 'N/A';
+        if (dashboardStudentId) dashboardStudentId.textContent = student.studentId || 'N/A';
+
+        // Update avatar
+        const dashboardAvatar = document.getElementById('dashboardAvatar');
+        if (dashboardAvatar) {
+          if (student.profilePhoto) {
+            dashboardAvatar.src = student.profilePhoto;
+          } else if (student.studentId) {
+            dashboardAvatar.src = `./${student.studentId}.png`;
+          }
+        }
+
+        // Update academic info
+        const dashboardSchool = document.getElementById('dashboardSchool');
+        const dashboardProgram = document.getElementById('dashboardProgram');
+        const dashboardLevel = document.getElementById('dashboardLevel');
+        const dashboardSession = document.getElementById('dashboardSession');
+        const dashboardStatus = document.getElementById('dashboardStatus');
+        const dashboardSponsor = document.getElementById('dashboardSponsor');
+        const dashboardAccommodation = document.getElementById('dashboardAccommodation');
+        const dashboardRemark = document.getElementById('dashboardRemark');
+
+        if (dashboardSchool) dashboardSchool.textContent = student.school || 'N/A';
+        if (dashboardProgram) dashboardProgram.textContent = student.program || 'N/A';
+        if (dashboardLevel) dashboardLevel.textContent = student.year ? `Year ${student.year} Semester 1` : 'N/A';
+        if (dashboardSession) dashboardSession.textContent = student.academicSession || 'N/A';
+        if (dashboardStatus) dashboardStatus.textContent = student.registrationStatus || 'N/A';
+        if (dashboardSponsor) dashboardSponsor.textContent = student.studentSponsor || 'N/A';
+        if (dashboardAccommodation) dashboardAccommodation.textContent = student.accommodation || 'N/A';
+        if (dashboardRemark) dashboardRemark.textContent = student.remark || 'NO COMMENT ADDED YET';
+
+        // Update finance info
+        const dashboardBalance = document.getElementById('dashboardBalance');
+        const financeBalance = document.getElementById('financeBalance');
+        const financeStudentInfo = document.getElementById('financeStudentInfo');
+        const financeStatementInfo = document.getElementById('financeStatementInfo');
+
+        if (student.finance) {
+          const balance = student.finance.balance || 0;
+          const balanceText = `ZMW ${balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+          if (dashboardBalance) dashboardBalance.textContent = balanceText;
+          if (financeBalance) financeBalance.textContent = balanceText;
+          const infoText = `Student: ${escapeHtml(student.fullName)} · ID: ${escapeHtml(student.studentId)}`;
+          if (financeStudentInfo) financeStudentInfo.textContent = infoText;
+          if (financeStatementInfo) financeStatementInfo.textContent = infoText;
+        } else {
+          if (dashboardBalance) dashboardBalance.textContent = 'ZMW 0.00';
+          if (financeBalance) financeBalance.textContent = 'ZMW 0.00';
+          const infoText = `Student: ${escapeHtml(student.fullName)} · ID: ${escapeHtml(student.studentId)}`;
+          if (financeStudentInfo) financeStudentInfo.textContent = infoText;
+          if (financeStatementInfo) financeStatementInfo.textContent = infoText;
+        }
+
+        // Calculate and update CGPA
+        const dashboardCGPA = document.getElementById('dashboardCGPA');
+        if (student.results && student.results.length > 0) {
+          const totalScore = student.results.reduce((sum, r) => sum + (parseFloat(r.score) || 0), 0);
+          const averageScore = totalScore / student.results.length;
+          const gpa = (averageScore / 25).toFixed(2);
+          if (dashboardCGPA) dashboardCGPA.textContent = `${gpa} / 4.00`;
+        } else {
+          if (dashboardCGPA) dashboardCGPA.textContent = '0.00 / 4.00';
+        }
+
+        // Update results view
+        updateResultsView(student);
+      } else {
+        // Redirect to login if no student session
+        window.location.href = './index.html';
+      }
+    }
+
+    function updateResultsView(student) {
+      if (!student) return;
+
+      // Check for outstanding fees
+      const feeAlert = document.getElementById('feeClearanceAlert');
+      const outstandingFeeAmount = document.getElementById('outstandingFeeAmount');
+      let hasOutstandingFees = false;
+      let balance = 0;
+
+      if (student.finance && student.finance.balance > 0) {
+        hasOutstandingFees = true;
+        balance = student.finance.balance;
+      }
+
+      if (feeAlert) {
+        if (hasOutstandingFees) {
+          feeAlert.style.display = 'flex';
+          if (outstandingFeeAmount) {
+            outstandingFeeAmount.textContent = `ZMW ${balance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+          }
+        } else {
+          feeAlert.style.display = 'none';
+        }
+      }
+
+      // Update results summary cards
+      if (student.results && student.results.length > 0) {
+        const totalCourses = student.results.length;
+        const passedCourses = student.results.filter(r => {
+          const grade = r.grade || getGradeFromScore(r.score);
+          return (grade || 'F').toUpperCase() !== 'F';
+        }).length;
+
+        const totalScore = student.results.reduce((sum, r) => {
+          if (r && r.score !== undefined && r.score !== null && r.score !== '') return sum + (parseFloat(r.score) || 0);
+          return sum + (getScoreFromGrade(r.grade) || 0);
+        }, 0);
+        const averageScore = totalScore / student.results.length;
+        const gpa = (averageScore / 25).toFixed(2);
+        const credits = totalCourses * 3; // Assuming 3 credits per course
+
+        const totalCoursesPassed = document.getElementById('totalCoursesPassed');
+        const creditsEarned = document.getElementById('creditsEarned');
+        const overallGPA = document.getElementById('overallGPA');
+
+        // Show actual values only if fees are cleared, otherwise show "--"
+        if (totalCoursesPassed) {
+          totalCoursesPassed.textContent = hasOutstandingFees ? '-- / 5' : `${passedCourses} / ${totalCourses}`;
+        }
+        if (creditsEarned) {
+          creditsEarned.textContent = hasOutstandingFees ? '-- / --' : `${credits} / ${credits}`;
+        }
+        if (overallGPA) {
+          overallGPA.textContent = hasOutstandingFees ? '--' : gpa;
+        }
+
+        // Update results table
+        const resultsTableBody = document.getElementById('resultsTableBody');
+        if (resultsTableBody) {
+          if (hasOutstandingFees) {
+            // Show courses with "NE" (Not Entered) comment when fees are outstanding
+            resultsTableBody.innerHTML = student.results.map((result, index) => {
+              const courseCode = result.courseCode || generateCourseCode(result.course, index);
+              return `
+                  <tr>
+                    <td>${escapeHtml(courseCode)}</td>
+                    <td>${escapeHtml(result.course || 'N/A')}</td>
+                    <td>1</td>
+                    <td><span class="pill-gray">NE</span></td>
+                  </tr>
+                `;
+            }).join('');
+          } else {
+            // Show full results when fees are cleared
+            resultsTableBody.innerHTML = student.results.map((result, index) => {
+              const grade = result.grade || (result.score ? getGradeFromScore(parseFloat(result.score)) : null);
+              const courseCode = result.courseCode || generateCourseCode(result.course, index);
+
+              // Determine comment based on grade (show grade if present, otherwise NE)
+              let comment = 'NE';
+              if (grade) {
+                comment = grade;
+              }
+
+              return `
+                  <tr>
+                    <td>${escapeHtml(courseCode)}</td>
+                    <td>${escapeHtml(result.course || 'N/A')}</td>
+                    <td>1</td>
+                    <td><span class="pill-gray">${escapeHtml(comment)}</span></td>
+                  </tr>
+                `;
+            }).join('');
+          }
+        }
+      } else {
+        // No results
+        const totalCoursesPassed = document.getElementById('totalCoursesPassed');
+        const creditsEarned = document.getElementById('creditsEarned');
+        const overallGPA = document.getElementById('overallGPA');
+        const resultsTableBody = document.getElementById('resultsTableBody');
+
+        if (totalCoursesPassed) totalCoursesPassed.textContent = '-- / 5';
+        if (creditsEarned) creditsEarned.textContent = '-- / --';
+        if (overallGPA) overallGPA.textContent = '--';
+        if (resultsTableBody) {
+          resultsTableBody.innerHTML = `
+              <tr>
+                <td colspan="4" style="text-align: center; padding: 40px; color: var(--muted);">
+                  No results available
+                </td>
+              </tr>
+            `;
+        }
+      }
+    }
+
+    // Shared helpers are provided by utils.js
+
+    // Reload results when academic year changes
+    document.addEventListener('DOMContentLoaded', function () {
+      const resultsAcademicYear = document.getElementById('resultAcademicYear');
+      if (resultsAcademicYear) {
+        resultsAcademicYear.addEventListener('change', function () {
+          const student = getCurrentStudent();
+          if (student) {
+            updateResultsView(student);
+            const resultsTableTitle = document.getElementById('resultsTableTitle');
+            if (resultsTableTitle) {
+              resultsTableTitle.textContent = `Academic Year: ${this.value}`;
+            }
+          }
+        });
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      loadDashboardData();
+
+      // Reload data when window gains focus (user comes back from admin panel)
+      window.addEventListener('focus', function () {
+        loadDashboardData();
+      });
+    });
+  </script>
+  </body>
+
+</html>

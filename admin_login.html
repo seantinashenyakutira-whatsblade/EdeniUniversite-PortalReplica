@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login - AcademiX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <div class="login-shell">
+    <div class="brand-header">
+      <div class="brand">
+        <img src="10003.png" alt="AcademiX" class="brand-logo-small" />
+        <div class="name">
+          <span class="title">AcademiX</span>
+          <span class="subtitle">Admin Portal</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="login-card">
+      <div class="university-header">
+        <img src="10003.png" alt="Eden University" class="institution-logo" />
+        <div class="university-name">Eden University</div>
+      </div>
+
+      <form id="adminLoginForm">
+        <div class="field">
+          <label for="adminUsername">Admin Username</label>
+          <div class="input">
+            <span class="input-icon material-icons">admin_panel_settings</span>
+            <input id="adminUsername" name="username" type="text" placeholder="Enter admin username" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="adminPassword">Password</label>
+          <div class="input">
+            <span class="input-icon material-icons">lock</span>
+            <input id="adminPassword" name="password" type="password" placeholder="Enter admin password" required />
+            <button type="button" id="toggleAdminPass" class="eye-toggle material-icons" aria-label="Show password">
+              visibility
+            </button>
+          </div>
+        </div>
+
+        <button class="btn" type="submit">
+          Sign In <span aria-hidden="true">→</span>
+        </button>
+      </form>
+
+      <div class="muted-link">
+        <a href="./index.html">← Back to Student Login</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="admin_data.js"></script>
+  <script>
+    // FALLBACK: If admin_data.js fails to load (common on InfiniteFree), define the logic here
+    if (typeof getAdminAccount !== 'function') {
+      console.warn('admin_data.js not loaded. Using internal fallback logic.');
+
+      const FALLBACK_URL = 'https://uqeifgszsqtfcuscrexd.supabase.co';
+      const FALLBACK_KEY = 'sb_publishable_KO9_5LwsUO2tCYQsMKC8iA_Ur3Rj1SO';
+
+      // Initialize internal supabase client
+      let fb_supabase = null;
+      try {
+        if (window.supabase) {
+          fb_supabase = window.supabase.createClient(FALLBACK_URL, FALLBACK_KEY);
+        }
+      } catch (e) { console.error('Fallback Supabase init failed', e); }
+
+      window.getAdminAccount = async function () {
+        if (!fb_supabase) return { username: 'Administrator', password: '#Sean@7053' };
+        try {
+          const { data, error } = await fb_supabase.from('admin_settings').select('*').limit(1).single();
+          if (error) throw error;
+          return data;
+        } catch (e) {
+          console.error('getAdminAccount fallback failed', e);
+          return { username: 'Administrator', password: '#Sean@7053' };
+        }
+      };
+
+      window.isAdminLoggedIn = function () {
+        return sessionStorage.getItem('adminLoggedIn') === 'true';
+      };
+
+      window.logoutAdmin = function () {
+        sessionStorage.removeItem('adminLoggedIn');
+      };
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const adminLoginForm = document.getElementById('adminLoginForm');
+      if (adminLoginForm) {
+        adminLoginForm.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          const username = document.getElementById('adminUsername').value.trim();
+          const password = document.getElementById('adminPassword').value;
+
+          try {
+            // Use the globally available getAdminAccount (either from admin_data.js or fallback)
+            const adminAccount = await window.getAdminAccount();
+
+            if (username === adminAccount.username && password === adminAccount.password) {
+              sessionStorage.setItem('adminLoggedIn', 'true');
+              window.location.href = 'admin.html';
+            } else {
+              alert('Invalid admin credentials. Please check your username and password.');
+            }
+          } catch (err) {
+            console.error('Admin login error:', err);
+            alert('An error occurred during login. Please try again.');
+          }
+        });
+      }
+
+      // Password toggle
+      const toggleAdminPass = document.getElementById('toggleAdminPass');
+      if (toggleAdminPass) {
+        toggleAdminPass.addEventListener('click', function () {
+          const password = document.getElementById('adminPassword');
+          const isHidden = password.type === 'password';
+          password.type = isHidden ? 'text' : 'password';
+          this.textContent = isHidden ? 'visibility_off' : 'visibility';
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>
